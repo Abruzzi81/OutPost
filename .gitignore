@@ -1,0 +1,49 @@
+# --- Systemowe ---
+.DS_Store
+Thumbs.db
+
+# --- Logi i pliki tymczasowe ---
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.tmp/
+
+# --- Zależności (Biblioteki) ---
+# Nigdy nie wysyłaj tych folderów - są za duże!
+node_modules/
+bower_components/
+venv/
+env/
+bin/
+obj/
+
+# --- Pliki środowiskowe (TAJNE) ---
+# Tutaj trzymasz klucze API i hasła - MUSZĄ być zignorowane
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# --- Buildy i dystrybucja ---
+dist/
+build/
+out/
+*.exe
+*.dll
+*.so
+
+# --- IDE i edytory ---
+.vscode/
+.idea/
+*.swp
+*.sublime-project
+
+# Visual Studio pliki tymczasowe
+.vs/
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+*.shellmnt
