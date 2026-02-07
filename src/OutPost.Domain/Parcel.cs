@@ -11,15 +11,27 @@ public class Parcel
 
     // Sender
     public string s_Name { get; set; } = default!;
-    public string s_addres { get; set; } = default!;
+    public string s_address { get; set; } = default!;
     public string s_email { get; set; } = default!;
     public string s_phone_number { get; set; } = default!;
 
     // Recipient
     public string r_Name { get; set; } = default!;
-    public string r_addres { get; set; } = default!;
+    public string r_address { get; set; } = default!;
     public string r_email { get; set; } = default!;
     public string r_phone_number { get; set; } = default!;
+
+
+    // Constructor
+    private Parcel() { }
+    public Parcel(string address)
+    {
+        dateOfCreation = DateTime.Now;
+        TrackingNumber = dateOfCreation.ToString();
+        r_address = address;
+        Status = ParcelStatus.Created;
+    }
+
 
     public void ChangeStatus(ParcelStatus status)
     {

@@ -6,4 +6,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OutPost.Domain\OutPost.Domain.csproj" />
+    <ProjectReference Include="..\OutPost.Infrastructure\OutPost.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
