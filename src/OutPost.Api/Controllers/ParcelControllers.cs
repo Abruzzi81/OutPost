@@ -22,6 +22,30 @@ public class ParcelsController : ControllerBase
         // Serwis zajmie się resztą: nada TrackingNumber i ustawi Status na 'New'
         var trackingNumber = await _parcelService.CreateParcelAsync(dto);
 
+
+        // Sprawdzanie poprawnosci danych
+        if (dto.s_Phone_number.Length != 9)
+            return BadRequest("Niepoprawny numer telefonu nadawcy");
+
+        if (dto.r_Phone_number.Length != 9)
+            return BadRequest("Niepoprawny numer telefonu adresata");
+
+        if (!dto.s_Email.Contains('@'))
+            return BadRequest("Niepoprawny adres email nadawcy");
+
+        if (!dto.r_Email.Contains('@'))
+            return BadRequest("Niepoprawny adres email adresata");
+
         return Ok(new { Message = "Paczka utworzona!", TrackingNumber = trackingNumber });
+    }
+
+    [HttpGet("{trackingNumber}")]
+    public async Task<IActionResult> GetParcelByTrackingNumber(string trackingNumber)
+    {
+        ParcelDto parcel = await _parcelService.GetParcelByTrackingNumberAsync(trackingNumber);
+        if (parcel == null)  
+            return NotFound($"Paczka o numerze {trackingNumber} nie istnieje.");
+
+        return Ok(parcel);
     }
 }

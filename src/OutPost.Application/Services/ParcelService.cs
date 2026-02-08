@@ -16,7 +16,7 @@ public class ParcelService : IParcelService
     public async Task<string> CreateParcelAsync(CreateParcelDto dto)
     {
         // 1. Tworzymy obiekt Domain (Entity), który sam wygeneruje TrackingNumber
-        var parcel = new Parcel(dto.r_address);
+        var parcel = new Parcel(dto.s_Name, dto.s_Addres, dto.s_Email, dto.s_Phone_number, dto.r_Name, dto.r_Address, dto.r_Email, dto.r_Phone_number);
 
         // 2. Dodajemy do repozytorium
         await _repository.AddAsync(parcel);
@@ -36,7 +36,17 @@ public class ParcelService : IParcelService
         return new ParcelDto
         {
             TrackingNumber = parcel.TrackingNumber,
-            r_address = parcel.r_address
+            Status = parcel.Status,
+            s_Name = parcel.s_Name,
+            s_Address = parcel.s_Address,
+            s_Email = parcel.s_Email,
+            s_Phone_number = parcel.s_Phone_number,
+
+            r_Name = parcel.r_Name,
+            r_Address = parcel.r_Address,
+            r_Email = parcel.r_Email,
+            r_Phone_number = parcel.r_Phone_number
         };
+
     }
 }
