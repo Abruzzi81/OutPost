@@ -1,16 +1,11 @@
 ﻿
-using OutPost.Domain.Enums;
-
 namespace OutPost.Application.DTOs;
 
-public class ParcelDto
+public class CreateParcelDto()
 {
-    public required string TrackingNumber { get; set; } = default!;
-    public ParcelStatus Status { get; set; }
-
     // Sender
     public required string s_Name { get; set; }
-    public required string s_Address { get; set; }
+    public required string s_Addres { get; set; }
     public required string s_Email { get; set; }
     public required string s_Phone_number { get; set; }
 

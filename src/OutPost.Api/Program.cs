@@ -28,12 +28,14 @@ builder.Services.AddScoped<IParcelRepository, ParcelRepository>();
 
 var app = builder.Build();
 
+
+app.UseSwagger();
+app.UseSwaggerUI();
 /// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     // TE DWIE LINIE S¥ KLUCZOWE:
-    app.UseSwagger();
-    app.UseSwaggerUI();
+
 }
 else
 {

@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Reflection.Emit;
 using OutPost.Domain.Entities;
 
 namespace OutPost.Infrastructure.Persistence;
@@ -11,6 +9,7 @@ public class AppDbContext : DbContext
 
     // Ta linijka mówi: "Stwórz tabelę Parcels na podstawie klasy Parcel"
     public DbSet<Parcel> Parcels => Set<Parcel>();
+    public DbSet<Courier> Couriers => Set<Courier>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
