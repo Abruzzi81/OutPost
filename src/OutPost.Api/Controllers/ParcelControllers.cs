@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OutPost.Application.Interfaces;
 using OutPost.Application.DTOs;
+using OutPost.Domain.Enums;
 
 namespace OutPost.Api.Controllers;
 
@@ -47,5 +48,16 @@ public class ParcelsController : ControllerBase
             return NotFound($"Paczka o numerze {trackingNumber} nie istnieje.");
 
         return Ok(parcel);
+    }
+
+    [HttpPut("{trackingNumber}/status")]
+    public async Task<IActionResult> UpdateStatus(string trackingNumber,[FromBody] ParcelStatus newStatus)
+    {
+        bool success = await _parcelService.UpdateParcelStatus(trackingNumber, newStatus);
+
+        if (!success)
+            return NotFound($"Nie istnieje paczka o numerze {trackingNumber}");
+
+        return Ok(new {Message = "Pomyslnie zmieniono status" });
     }
 }

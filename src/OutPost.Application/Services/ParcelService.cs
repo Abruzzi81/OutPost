@@ -1,7 +1,8 @@
-﻿using OutPost.Application.DTOs;
+﻿using OutPost.Application.Abstractions;
+using OutPost.Application.DTOs;
 using OutPost.Application.Interfaces;
-using OutPost.Application.Abstractions;
 using OutPost.Domain.Entities;
+using OutPost.Domain.Enums;
 
 namespace OutPost.Application.Services;
 public class ParcelService : IParcelService
@@ -48,5 +49,16 @@ public class ParcelService : IParcelService
             r_Phone_number = parcel.r_Phone_number
         };
 
+    }
+
+    public async Task<bool> UpdateParcelStatus(string trackingNumber, ParcelStatus newStatus)
+    {
+        var parcel = await _repository.GetByTrackingNumberAsync(trackingNumber);
+        if (parcel == null) return false;
+
+        parcel.Status = newStatus;
+        await _repository.UpdateAsync(parcel);
+
+        return true;
     }
 }

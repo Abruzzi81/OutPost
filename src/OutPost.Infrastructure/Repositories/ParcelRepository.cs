@@ -29,4 +29,10 @@ public class ParcelRepository : IParcelRepository
     {
         await _context.SaveChangesAsync();
     }
+
+    public async Task UpdateAsync(Parcel parcel)
+    {
+        _context.Parcels.Update(parcel);
+        await _context.SaveChangesAsync();
+    }
 }

@@ -11,4 +11,6 @@ public interface IParcelRepository
 
     // Zapisywanie wszystkich zmian w bazie danych (Unit of Work)
     Task SaveChangesAsync();
+
+    Task UpdateAsync(Parcel parcel);
 }
