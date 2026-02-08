@@ -1,7 +1,7 @@
 ﻿using OutPost.Application.DTOs;
 using OutPost.Application.Interfaces;
 using OutPost.Application.Abstractions;
-using OutPost.Domain;
+using OutPost.Domain.Entities;
 
 namespace OutPost.Application.Services;
 public class ParcelService : IParcelService
@@ -13,7 +13,7 @@ public class ParcelService : IParcelService
         _repository = repository;
     }
 
-    public async Task<string> CreateParcelAsync(ParcelDto dto)
+    public async Task<string> CreateParcelAsync(CreateParcelDto dto)
     {
         // 1. Tworzymy obiekt Domain (Entity), który sam wygeneruje TrackingNumber
         var parcel = new Parcel(dto.r_address);

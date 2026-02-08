@@ -22,3 +22,8 @@ public class ParcelDto
   //  
 
 }
+
+public class CreateParcelDto()
+{
+    public required string r_address { get; set; }
+}

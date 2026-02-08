@@ -7,26 +7,37 @@ using OutPost.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Rejestracja generatora Swaggera
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 // Add services to the container.
 builder.Services.AddRazorPages();
 
 // Rejestracja serwisu (Scoped oznacza, ¿e ¿yje przez czas trwania jednego ¿¹dania HTTP)
 builder.Services.AddScoped<IParcelService, ParcelService>();
 
-// 1. Konfiguracja bazy danych (ConnectionString pobierany z appsettings.json)
+// Konfiguracja bazy danych (ConnectionString pobierany z appsettings.json)
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// 2. Rejestracja Repozytorium
+// Rejestracja Repozytorium
 builder.Services.AddScoped<IParcelRepository, ParcelRepository>();
+
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+/// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    // TE DWIE LINIE S¥ KLUCZOWE:
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+else
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -36,6 +47,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.MapControllers();
 
 app.MapRazorPages();
 

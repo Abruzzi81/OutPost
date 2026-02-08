@@ -1,7 +1,7 @@
 ﻿using OutPost.Application.Abstractions;
-using OutPost.Domain;
 using OutPost.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using OutPost.Domain.Entities;
 
 namespace OutPost.Infrastructure.Repositories;
 

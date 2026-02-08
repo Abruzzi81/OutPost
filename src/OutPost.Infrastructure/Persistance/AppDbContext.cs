@@ -1,7 +1,7 @@
-﻿using OutPost.Domain;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Reflection.Emit;
+using OutPost.Domain.Entities;
 
 namespace OutPost.Infrastructure.Persistence;
 

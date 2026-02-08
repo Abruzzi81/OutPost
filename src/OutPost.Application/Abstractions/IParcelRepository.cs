@@ -1,4 +1,4 @@
-﻿using OutPost.Domain;
+﻿using OutPost.Domain.Entities;
 namespace OutPost.Application.Abstractions;
 
 public interface IParcelRepository

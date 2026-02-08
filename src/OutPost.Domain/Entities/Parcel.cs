@@ -1,25 +1,27 @@
 ﻿using OutPost.Domain.Enums;
+using System.ComponentModel.DataAnnotations;
 
-namespace OutPost.Domain;
+namespace OutPost.Domain.Entities;
 
 public class Parcel
 {
+    [Key]
     public int Id { get; set; }
     public string TrackingNumber { get; set; } = default!;
     public ParcelStatus Status { get; set; }
     public DateTime dateOfCreation { get; set; }
 
     // Sender
-    public string s_Name { get; set; } = default!;
-    public string s_address { get; set; } = default!;
+    /*public string s_Name { get; set; } = default!;
+   public string s_address { get; set; } = default!;
     public string s_email { get; set; } = default!;
     public string s_phone_number { get; set; } = default!;
-
+*/
     // Recipient
-    public string r_Name { get; set; } = default!;
+   // public string r_Name { get; set; } = default!;
     public string r_address { get; set; } = default!;
-    public string r_email { get; set; } = default!;
-    public string r_phone_number { get; set; } = default!;
+   // public string r_email { get; set; } = default!;
+   // public string r_phone_number { get; set; } = default!;
 
 
     // Constructor
