@@ -5,7 +5,7 @@ namespace OutPost.Api.Controllers;
 
 
 [ApiController]
-[Route("api/couriers")]
+[Route("api/courier")]
 public class CourierController : ControllerBase
 {
     private readonly ICourierService _courierService;
@@ -15,8 +15,10 @@ public class CourierController : ControllerBase
         _courierService = courierService;
     }
 
+    // ===================================== POST =====================================
 
     [HttpPost]
+    [EndpointSummary("Tworzy nowego kuriera")]
     public async Task<IActionResult> Create([FromBody] CreateCourierDto courierDto)
     {
 
@@ -26,17 +28,11 @@ public class CourierController : ControllerBase
         return Ok(new { message = "Kurier dodany do zespołu" });
     }
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetCourierById(int id)
-    {
-        CourierDto courier = await _courierService.GetCourierAsync(id);
-        if (courier == null)
-            return NotFound($"Nie znaleziono kuriera o ID {id}");
 
-        return Ok(courier);
-    }
-
+    // ===================================== GET =====================================
+    
     [HttpGet]
+    [EndpointSummary("Pobiera informacje o wszystkich kurierach")]
     public async Task<IActionResult> GetAllCouriers()
     {
         var couriers = await _courierService.GetAllAsync();
@@ -46,7 +42,23 @@ public class CourierController : ControllerBase
         return Ok(couriers);
     }
 
-    [HttpPut]
+    [HttpGet("{id}")]
+    [EndpointSummary("Pobiera informacje o danym kurierze")]
+    public async Task<IActionResult> GetCourierById(int id)
+    {
+        CourierDto courier = await _courierService.GetCourierAsync(id);
+        if (courier == null)
+            return NotFound($"Nie znaleziono kuriera o ID {id}");
+
+        return Ok(courier);
+    }
+
+
+
+    // ===================================== PUT =====================================
+
+    [HttpPut("{id}/status")]
+    [EndpointSummary("Zmienia status zatrudnienia kuriera")]
     public async Task<IActionResult> UpdateEmploymentStatus(int id, bool isHired)
     {
         if (!await _courierService.UpdateEmploymentStatus(id, isHired))

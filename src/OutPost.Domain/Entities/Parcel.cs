@@ -31,13 +31,14 @@ public class Parcel
 
     // ================================= Constructor =================================
     private Parcel() { }
-    public Parcel(string s_name, string s_address, string s_email, string s_phoneNumber,
+    public Parcel(int s_id, string s_name, string s_address, string s_email, string s_phoneNumber,
                   string r_name, string r_address, string r_email, string r_phoneNumber )
     {
         DateOfCreation = DateTime.Now;
-        TrackingNumber = CreateTrackingNumber();
+        TrackingNumber = "";
         Status = ParcelStatus.Created;
 
+        SenderId = s_id;
         s_Name = s_name;
         s_Address = s_address;
         s_Email = s_email;
@@ -55,11 +56,15 @@ public class Parcel
         Status = status;
     }
 
-    private string CreateTrackingNumber()
+    public string CreateTrackingNumber()
     {
-        int rangeNumber = Random.Shared.Next(1000, 10000);
+        int rangeNumber = Random.Shared.Next(0, 10000);
 
-        return DateOfCreation.Year.ToString() + DateOfCreation.Month.ToString() + DateOfCreation.Day.ToString() + DateOfCreation.Millisecond.ToString() 
-                + rangeNumber.ToString();
+        return DateOfCreation.ToString("yy") //ostatnie 2 cyfry roku
+            + DateOfCreation.Month.ToString("D2")
+            + DateOfCreation.Day.ToString("D2")
+            + Id.ToString("D5")
+            + DateOfCreation.Millisecond.ToString("D3") 
+            + rangeNumber.ToString("D4");
     }
 }

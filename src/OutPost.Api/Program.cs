@@ -1,9 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using OutPost.Application.Abstractions; 
-using OutPost.Application.Services;
 using OutPost.Application.Interfaces;
+using OutPost.Application.LabelGenerator;
+using OutPost.Application.Services;
 using OutPost.Infrastructure.Persistence; 
 using OutPost.Infrastructure.Repositories;
+using QuestPDF.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +20,7 @@ builder.Services.AddRazorPages();
 // Rejestracja Repozytorium i Serwisu Paczki
 builder.Services.AddScoped<IParcelService, ParcelService>();
 builder.Services.AddScoped<IParcelRepository, ParcelRepository>();
+builder.Services.AddScoped<LabelService>();
 
 // Rejestracja Repozytorium i Serwisu Kuriera
 builder.Services.AddScoped<ICourierRepository, CourierRepository>();
@@ -35,6 +38,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 var app = builder.Build();
 
+// Konfiguracja licencji QuestPDF
+QuestPDF.Settings.License = LicenseType.Community;
 
 app.UseSwagger();
 app.UseSwaggerUI();

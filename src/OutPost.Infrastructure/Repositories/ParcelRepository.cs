@@ -25,6 +25,11 @@ public class ParcelRepository : IParcelRepository
             .FirstOrDefaultAsync(p => p.TrackingNumber == trackingNumber);
     }
 
+    public async Task<IEnumerable<Parcel>> GetAllParcelsAsync()
+    {
+        return await _context.Parcels.ToListAsync();
+    }
+
     public async Task SaveChangesAsync()
     {
         await _context.SaveChangesAsync();

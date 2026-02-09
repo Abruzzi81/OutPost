@@ -3,8 +3,10 @@ namespace OutPost.Application.Abstractions;
 
 public interface IParcelRepository
 {
-    // Pobieranie paczki po Tracking Number (to co widzi klient)
+    // Pobieranie paczki po Tracking Number
     Task<Parcel?> GetByTrackingNumberAsync(string trackingNumber);
+    //Pobieranie wszystkich paczek
+    Task<IEnumerable<Parcel>> GetAllParcelsAsync();
 
     // Dodawanie nowej paczki do kolejki zapisu
     Task AddAsync(Parcel parcel);
