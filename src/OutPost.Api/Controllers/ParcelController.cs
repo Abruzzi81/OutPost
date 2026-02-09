@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OutPost.Application.DTOs;
 using OutPost.Application.Interfaces;
 using OutPost.Application.LabelGenerator;
@@ -50,6 +51,7 @@ public class ParcelController : ControllerBase
 
     // ===================================== GET =====================================
 
+    [Authorize(Roles = "Admin")]
     [HttpGet("all")]
     [EndpointSummary("Pobiera informacje o wszystkich paczkach")]
     public async Task<IActionResult> GetAllParcels()

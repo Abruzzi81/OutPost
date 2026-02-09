@@ -1,19 +1,23 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OutPost.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace OutPost.Infrastructure.Persistence;
 
-public class AppDbContext : DbContext
+public class AppDbContext : IdentityDbContext<User>
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
     // Ta linijka mówi: "Stwórz tabelę Parcels na podstawie klasy Parcel"
     public DbSet<Parcel> Parcels => Set<Parcel>();
     public DbSet<Courier> Couriers => Set<Courier>();
-    public DbSet<Client> Clients => Set<Client>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+
+
         // Tutaj możesz doprecyzować reguły, np. unikalny numer śledzenia
         modelBuilder.Entity<Parcel>(entity =>
         {
@@ -28,7 +32,6 @@ public class AppDbContext : DbContext
 
         modelBuilder.Entity<Courier>();
 
-        modelBuilder.Entity<Client>()
-            .HasIndex(c => c.Email).IsUnique();
+        modelBuilder.Entity<User>().ToTable("Users");
     }
 }

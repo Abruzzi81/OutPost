@@ -5,12 +5,12 @@ using OutPost.Application.Interfaces;
 namespace OutPost.Api.Controllers;
 
 [ApiController]
-[Route("api/client")]
-public class ClientController : ControllerBase
+[Route("api/user")]
+public class UserController : ControllerBase
 {
-    private readonly IClientService _clientService;
+    private readonly IUserService _clientService;
 
-    public ClientController(IClientService clientService)
+    public UserController(IUserService clientService)
     {
         _clientService = clientService;
     }
@@ -19,9 +19,9 @@ public class ClientController : ControllerBase
 
     [HttpPost]
     [EndpointSummary("Tworzy nowego klienta")]
-    public async Task<IActionResult> AddClientAsync([FromBody] CreateClientDto dto)
+    public async Task<IActionResult> AddClientAsync([FromBody] CreateUserDto dto)
     {
-        int id = await _clientService.CreateClientAsync(dto);
+        string id = await _clientService.CreateClientAsync(dto);
 
         return Ok(new { message = $"Utworzono nowego klienta o numerze ID: {id}"});
     }
@@ -42,7 +42,7 @@ public class ClientController : ControllerBase
 
     [HttpGet("{id}")]
     [EndpointSummary("Pobiera informacje o danym kliencie")]
-    public async Task<IActionResult> GetClientByIdAsync(int id)
+    public async Task<IActionResult> GetClientByIdAsync(string id)
     {
         var client = await _clientService.GetClientByIdAsync(id);
         if (client == null) 

@@ -6,13 +6,13 @@ public interface IClientRepository
 {
 
     // Dodawanie nowego klienta do kolejki zapisu
-    Task AddAsync(Client client);
+    Task AddAsync(User client);
 
-    Task<Client?> GetByIdAsync(int id);
-    Task<IEnumerable<Client>> GetAllAsync();
+    Task<User?> GetByIdAsync(string id);
+    Task<IEnumerable<User>> GetAllAsync();
 
 
     // Zapisywanie wszystkich zmian w bazie danych
     Task SaveChangesAsync();
-    Task UpdateAsync(Client client);
+    Task UpdateAsync(User client);
 }

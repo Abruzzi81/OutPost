@@ -12,8 +12,8 @@ public class Parcel
     public DateTime DateOfCreation { get; set; }
 
     // Sender
-    public int SenderId { get; set; }
-    public Client Sender { get; set; }
+    public string SenderId { get; set; }
+    public User Sender { get; set; }
     public string s_Name { get; set; } = default!;
     public string s_Address { get; set; } = default!;
     public string s_Email { get; set; } = default!;
@@ -31,7 +31,7 @@ public class Parcel
 
     // ================================= Constructor =================================
     private Parcel() { }
-    public Parcel(int s_id, string s_name, string s_address, string s_email, string s_phoneNumber,
+    public Parcel(string s_id, string s_name, string s_address, string s_email, string s_phoneNumber,
                   string r_name, string r_address, string r_email, string r_phoneNumber )
     {
         DateOfCreation = DateTime.Now;

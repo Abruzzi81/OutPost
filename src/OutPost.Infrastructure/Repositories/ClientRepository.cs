@@ -1,5 +1,4 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using OutPost.Application.Abstractions;
 using OutPost.Domain.Entities;
 using OutPost.Infrastructure.Persistence;
@@ -16,19 +15,19 @@ public class ClientRepository : IClientRepository
     }
 
 
-    public async Task AddAsync(Client client)
+    public async Task AddAsync(User user)
     {
-        await _context.Clients.AddAsync(client);
+        await _context.Users.AddAsync(user);
     }
 
-    public async Task<Client?> GetByIdAsync(int id)
+    public async Task<User?> GetByIdAsync(string id)
     {
-        return await _context.Clients
+        return await _context.Users
             .FirstOrDefaultAsync(c => c.Id == id);
     }
-    public async Task<IEnumerable<Client>> GetAllAsync()
+    public async Task<IEnumerable<User>> GetAllAsync()
     {
-        return await _context.Clients.ToListAsync();
+        return await _context.Users.ToListAsync();
     }
 
 
@@ -37,9 +36,9 @@ public class ClientRepository : IClientRepository
     {
         await _context.SaveChangesAsync();
     }
-    public async Task UpdateAsync(Client client)
+    public async Task UpdateAsync(User user)
     {
-        _context.Clients.Update(client);
+        _context.Users.Update(user);
         await _context.SaveChangesAsync();
     }
 }
