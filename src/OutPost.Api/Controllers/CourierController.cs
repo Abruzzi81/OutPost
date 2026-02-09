@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OutPost.Application.DTOs;
 using OutPost.Application.Interfaces;
-using OutPost.Application.Services;
-
 namespace OutPost.Api.Controllers;
 
 
@@ -42,6 +40,8 @@ public class CourierController : ControllerBase
     public async Task<IActionResult> GetAllCouriers()
     {
         var couriers = await _courierService.GetAllAsync();
+        if (couriers == null)
+            return NotFound("Nie znaleziono kurierów");
 
         return Ok(couriers);
     }

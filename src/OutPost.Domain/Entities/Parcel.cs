@@ -12,22 +12,27 @@ public class Parcel
     public DateTime DateOfCreation { get; set; }
 
     // Sender
+    public int SenderId { get; set; }
+    public Client Sender { get; set; }
     public string s_Name { get; set; } = default!;
     public string s_Address { get; set; } = default!;
     public string s_Email { get; set; } = default!;
-    public string s_Phone_number { get; set; } = default!;
+    public string s_PhoneNumber { get; set; } = default!;
 
     // Recipient
     public string r_Name { get; set; } = default!;
     public string r_Address { get; set; } = default!;
     public string r_Email { get; set; } = default!;
-    public string r_Phone_number { get; set; } = default!;
+    public string r_PhoneNumber { get; set; } = default!;
 
 
-    // Constructor
+
+
+
+    // ================================= Constructor =================================
     private Parcel() { }
-    public Parcel(string s_name, string s_address, string s_email, string s_phone_number,
-                  string r_name, string r_address, string r_email, string r_phone_number )
+    public Parcel(string s_name, string s_address, string s_email, string s_phoneNumber,
+                  string r_name, string r_address, string r_email, string r_phoneNumber )
     {
         DateOfCreation = DateTime.Now;
         TrackingNumber = CreateTrackingNumber();
@@ -36,12 +41,12 @@ public class Parcel
         s_Name = s_name;
         s_Address = s_address;
         s_Email = s_email;
-        s_Phone_number = s_phone_number;
+        s_PhoneNumber = s_phoneNumber;
 
         r_Name = r_name;
         r_Address = r_address;
         r_Email = r_email;
-        r_Phone_number = r_phone_number;        
+        r_PhoneNumber = r_phoneNumber;        
     }
 
 

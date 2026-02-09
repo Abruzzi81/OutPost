@@ -16,7 +16,7 @@ public class CourierRepository : ICourierRepository
     }
 
 
-    // Funkcje
+    // ================================== Funkcje ==================================
 
 
     // Dodawanie nowego kuriera do kolejki zapisu

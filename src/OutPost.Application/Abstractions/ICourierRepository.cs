@@ -1,6 +1,5 @@
 ﻿using OutPost.Domain.Entities;
 
-
 namespace OutPost.Application.Abstractions;
 
 public interface ICourierRepository

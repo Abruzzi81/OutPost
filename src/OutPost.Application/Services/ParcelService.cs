@@ -38,15 +38,17 @@ public class ParcelService : IParcelService
         {
             TrackingNumber = parcel.TrackingNumber,
             Status = parcel.Status,
+            Sender_Id = parcel.SenderId,
+            Sender = parcel.Sender,
             s_Name = parcel.s_Name,
             s_Address = parcel.s_Address,
             s_Email = parcel.s_Email,
-            s_Phone_number = parcel.s_Phone_number,
+            s_Phone_number = parcel.s_PhoneNumber,
 
             r_Name = parcel.r_Name,
             r_Address = parcel.r_Address,
             r_Email = parcel.r_Email,
-            r_Phone_number = parcel.r_Phone_number
+            r_Phone_number = parcel.r_PhoneNumber
         };
 
     }

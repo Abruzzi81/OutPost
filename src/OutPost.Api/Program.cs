@@ -23,11 +23,14 @@ builder.Services.AddScoped<IParcelRepository, ParcelRepository>();
 builder.Services.AddScoped<ICourierRepository, CourierRepository>();
 builder.Services.AddScoped<ICourierService, CourierService>();
 
+// Rejestracja Repozytorium i Serwisu Klienta
+builder.Services.AddScoped<IClientRepository, ClientRepository>();
+builder.Services.AddScoped<IClientService, ClientService>();
+
 // Konfiguracja bazy danych (ConnectionString pobierany z appsettings.json)
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Rejestracja Repozytorium
 
 
 var app = builder.Build();
