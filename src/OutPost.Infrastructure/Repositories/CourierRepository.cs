@@ -31,6 +31,11 @@ public class CourierRepository : ICourierRepository
             .FirstOrDefaultAsync(c => c.Id == id);
     }
 
+    public async Task<IEnumerable<Courier>> GetAllAsync()
+    {
+        return await _context.Couriers.ToListAsync();
+    }
+
     // Zapisywanie wszystkich zmian w bazie danych
     public async Task SaveChangesAsync()
     {

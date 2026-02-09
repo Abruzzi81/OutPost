@@ -35,11 +35,31 @@ public class CourierService : ICourierService
 
     public async Task<CourierDto?> GetCourierAsync(int id)
     {
-        return null;
+        var courier = await _repository.GetByIdAsync(id);
+        if (courier == null) return null;
+
+        return new CourierDto
+        {
+            Id = courier.Id,
+            Name = courier.Name,
+            DateOfHire = courier.DateOfHire,
+            IsHired = courier.IsHired
+        };
     }
 
-    public async Task<bool> UpdateEmploymentStatus(int id, bool status)
+    public async Task<IEnumerable<Courier>> GetAllAsync()
     {
-        return false;
+        return await _repository.GetAllAsync();
+    }
+
+    public async Task<bool> UpdateEmploymentStatus(int id, bool isHired)
+    {
+        var courier = await _repository.GetByIdAsync(id);
+        if (courier == null) { return false; }
+
+        courier.IsHired = isHired;
+        await _repository.UpdateAsync(courier);
+
+        return true;
     }
 }

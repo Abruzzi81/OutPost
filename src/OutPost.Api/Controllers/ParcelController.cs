@@ -7,12 +7,12 @@ namespace OutPost.Api.Controllers;
 
 [ApiController]
 [Route("api/parcels")]
-public class ParcelsController : ControllerBase
+public class ParcelController : ControllerBase
 {
     private readonly IParcelService _parcelService;
 
-    // Konstruktor wstrzykuje IParcelService, który zarejestrowaliśmy w Program.cs
-    public ParcelsController(IParcelService parcelService)
+    // Konstruktor wstrzykuje IParcelService
+    public ParcelController(IParcelService parcelService)
     {
         _parcelService = parcelService;
     }

@@ -11,6 +11,7 @@ public interface ICourierRepository
     Task AddAsync(Courier courier);
 
     Task<Courier?> GetByIdAsync(int id);
+    Task<IEnumerable<Courier>> GetAllAsync();
 
     // Zapisywanie wszystkich zmian w bazie danych
     Task SaveChangesAsync();

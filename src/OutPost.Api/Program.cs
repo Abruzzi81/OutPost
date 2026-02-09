@@ -15,15 +15,19 @@ builder.Services.AddSwaggerGen();
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-// Rejestracja serwisu (Scoped oznacza, ¿e ¿yje przez czas trwania jednego ¿¹dania HTTP)
+// Rejestracja Repozytorium i Serwisu Paczki
 builder.Services.AddScoped<IParcelService, ParcelService>();
+builder.Services.AddScoped<IParcelRepository, ParcelRepository>();
+
+// Rejestracja Repozytorium i Serwisu Kuriera
+builder.Services.AddScoped<ICourierRepository, CourierRepository>();
+builder.Services.AddScoped<ICourierService, CourierService>();
 
 // Konfiguracja bazy danych (ConnectionString pobierany z appsettings.json)
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Rejestracja Repozytorium
-builder.Services.AddScoped<IParcelRepository, ParcelRepository>();
 
 
 var app = builder.Build();

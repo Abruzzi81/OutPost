@@ -1,0 +1,58 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using OutPost.Application.DTOs;
+using OutPost.Application.Interfaces;
+using OutPost.Application.Services;
+
+namespace OutPost.Api.Controllers;
+
+
+[ApiController]
+[Route("api/couriers")]
+public class CourierController : ControllerBase
+{
+    private readonly ICourierService _courierService;
+
+    public CourierController(ICourierService courierService)
+    {
+        _courierService = courierService;
+    }
+
+
+    [HttpPost]
+    public async Task<IActionResult> Create([FromBody] CreateCourierDto courierDto)
+    {
+
+        if (!await _courierService.CreateCourierlAsync(courierDto))
+            return BadRequest(new { error = "Nie udało się dodać kuriera. Sprawdź poprawność danych." });
+
+        return Ok(new { message = "Kurier dodany do zespołu" });
+    }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetCourierById(int id)
+    {
+        CourierDto courier = await _courierService.GetCourierAsync(id);
+        if (courier == null)
+            return NotFound($"Nie znaleziono kuriera o ID {id}");
+
+        return Ok(courier);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAllCouriers()
+    {
+        var couriers = await _courierService.GetAllAsync();
+
+        return Ok(couriers);
+    }
+
+    [HttpPut]
+    public async Task<IActionResult> UpdateEmploymentStatus(int id, bool isHired)
+    {
+        if (!await _courierService.UpdateEmploymentStatus(id, isHired))
+            return NotFound($"Nie znaleziono kuriera o ID {id}");
+
+        return Ok();
+    }
+}
+
