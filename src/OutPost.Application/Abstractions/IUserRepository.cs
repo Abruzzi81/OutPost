@@ -2,7 +2,7 @@
 
 namespace OutPost.Application.Abstractions;
 
-public interface IClientRepository
+public interface IUserRepository
 {
 
     // Dodawanie nowego klienta do kolejki zapisu

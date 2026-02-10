@@ -5,8 +5,8 @@ namespace OutPost.Application.Interfaces;
 
 public interface IUserService
 {
-    Task<string> CreateClientAsync(CreateUserDto dto);
-    Task<UserDto?> GetClientByIdAsync(string id);
-    Task<IEnumerable<User>> GetAllClientsAsync();
+    Task<string> CreateUserAsync(CreateUserDto dto);
+    Task<UserDto?> GetUserByIdAsync(string id);
+    Task<IEnumerable<User>> GetAllUsersAsync();
 
 }

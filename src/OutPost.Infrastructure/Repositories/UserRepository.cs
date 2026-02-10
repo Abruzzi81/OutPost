@@ -5,11 +5,11 @@ using OutPost.Infrastructure.Persistence;
 
 namespace OutPost.Infrastructure.Repositories;
 
-public class ClientRepository : IClientRepository
+public class UserRepository : IUserRepository
 {
     private readonly AppDbContext _context;
 
-    public ClientRepository(AppDbContext context)
+    public UserRepository(AppDbContext context)
     {
         _context = context;
     }

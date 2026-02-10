@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OutPost.Application.DTOs;
 using OutPost.Application.Interfaces;
 namespace OutPost.Api.Controllers;
@@ -17,6 +18,7 @@ public class CourierController : ControllerBase
 
     // ===================================== POST =====================================
 
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     [EndpointSummary("Tworzy nowego kuriera")]
     public async Task<IActionResult> Create([FromBody] CreateCourierDto courierDto)
@@ -30,7 +32,8 @@ public class CourierController : ControllerBase
 
 
     // ===================================== GET =====================================
-    
+
+    [Authorize(Roles = "Admin")]
     [HttpGet]
     [EndpointSummary("Pobiera informacje o wszystkich kurierach")]
     public async Task<IActionResult> GetAllCouriers()
@@ -42,6 +45,7 @@ public class CourierController : ControllerBase
         return Ok(couriers);
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpGet("{id}")]
     [EndpointSummary("Pobiera informacje o danym kurierze")]
     public async Task<IActionResult> GetCourierById(int id)
@@ -57,6 +61,7 @@ public class CourierController : ControllerBase
 
     // ===================================== PUT =====================================
 
+    [Authorize(Roles = "Admin")]
     [HttpPut("{id}/status")]
     [EndpointSummary("Zmienia status zatrudnienia kuriera")]
     public async Task<IActionResult> UpdateEmploymentStatus(int id, bool isHired)

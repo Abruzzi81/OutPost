@@ -24,6 +24,7 @@ public class ParcelController : ControllerBase
 
     // ===================================== POST =====================================
 
+    [Authorize]
     [HttpPost]
     [EndpointSummary("Tworzy nową paczkę")]
     public async Task<IActionResult> Create([FromBody] CreateParcelDto dto)
@@ -63,6 +64,7 @@ public class ParcelController : ControllerBase
         return Ok(parcels);
     }
 
+    [Authorize]
     [HttpGet("{trackingNumber}")]
     [EndpointSummary("Pobiera informacje o danej paczce")]
     public async Task<IActionResult> GetParcelByTrackingNumber(string trackingNumber)
@@ -74,6 +76,7 @@ public class ParcelController : ControllerBase
         return Ok(parcel);
     }
 
+    [Authorize]
     [HttpGet("{trackingNumber}/label")]
     [EndpointSummary("Generuje etykiete")]
     public async Task<IActionResult> GetLabel(string trackingNumber)
@@ -90,6 +93,7 @@ public class ParcelController : ControllerBase
 
     // ===================================== PUT =====================================
 
+    [Authorize(Roles = "Admin")]
     [HttpPut("{trackingNumber}/status")]
     [EndpointSummary("Zmienia status paczki")]
     public async Task<IActionResult> UpdateStatus(string trackingNumber,[FromBody] ParcelStatus newStatus)

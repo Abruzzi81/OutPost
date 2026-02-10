@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OutPost.Application.DTOs;
 using OutPost.Application.Interfaces;
-using OutPost.Application.Services;
 
 namespace OutPost.Api.Controllers;
 
@@ -19,33 +19,35 @@ public class UserController : ControllerBase
     // ===================================== POST =====================================
 
     [HttpPost]
-    [EndpointSummary("Tworzy nowego klienta")]
+    [EndpointSummary("Tworzy nowego użytkownika")]
     public async Task<IActionResult> AddUserAsync([FromBody] CreateUserDto dto)
     {
-        string id = await _userService.CreateClientAsync(dto);
+        string id = await _userService.CreateUserAsync(dto);
 
-        return Ok(new { message = $"Utworzono nowego klienta o numerze ID: {id}"});
+        return Ok(new { message = $"Utworzono nowego użytkownika o numerze ID: {id}"});
     }
 
 
     // ===================================== GET =====================================
 
+    [Authorize(Roles = "Admin")]
     [HttpGet]
     [EndpointSummary("Pobiera dane o wszystkich klientach")]
     public async Task<IActionResult> GetAllUsersAsync()
     {
-        var couriers = await _userService.GetAllClientsAsync();
+        var couriers = await _userService.GetAllUsersAsync();
         if (couriers == null)
             return NotFound("Nie znaleziono klientów");
 
         return Ok(couriers);
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpGet("{id}")]
     [EndpointSummary("Pobiera informacje o danym kliencie")]
     public async Task<IActionResult> GetUserByIdAsync(string id)
     {
-        var client = await _userService.GetClientByIdAsync(id);
+        var client = await _userService.GetUserByIdAsync(id);
         if (client == null) 
             return NotFound($"Nie znaleziono kuriera o numerze ID: {id}");
 
