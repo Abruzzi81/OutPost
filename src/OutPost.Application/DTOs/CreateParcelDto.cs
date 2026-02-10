@@ -6,7 +6,7 @@ namespace OutPost.Application.DTOs;
 public class CreateParcelDto()
 {
     // Sender
-    public string Sender_Id { get; set; }
+    public required string Sender_Id { get; set; }
     //public required Client Sender { get; set; }
     public required string s_Name { get; set; }
     public required string s_Addres { get; set; }

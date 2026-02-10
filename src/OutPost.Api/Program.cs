@@ -14,8 +14,12 @@ using OutPost.Infrastructure.Repositories;
 using QuestPDF.Infrastructure;
 using System.Text;
 using Microsoft.OpenApi.Models;
+using System.IdentityModel.Tokens.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Ta linia rozwi¹zuje problem z 403 przy rolach
+JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
 // Rejestracja generatora Swaggera
 builder.Services.AddControllers();
@@ -68,19 +72,19 @@ builder.Services.AddAuthentication(options => {
 
 builder.Services.AddSwaggerGen(options =>
 {
-    options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    options.SwaggerDoc("v1", new OpenApiInfo
     {
         Title = "OutPost API",
         Version = "v1"
     });
 
     // 1. Definicja zabezpieczeñ
-    var securityScheme = new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+    var securityScheme = new OpenApiSecurityScheme
     {
         Name = "Authorization",
         Description = "Wpisz sam token JWT",
-        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
-        Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.Http,
         Scheme = "bearer",
         BearerFormat = "JWT"
     };
@@ -88,14 +92,14 @@ builder.Services.AddSwaggerGen(options =>
     options.AddSecurityDefinition("Bearer", securityScheme);
 
     // 2. Wymaganie zabezpieczeñ
-    options.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {
-            new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+            new OpenApiSecurityScheme
             {
-                Reference = new Microsoft.OpenApi.Models.OpenApiReference
+                Reference = new OpenApiReference
                 {
-                    Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
+                    Type = ReferenceType.SecurityScheme,
                     Id = "Bearer"
                 }
             },

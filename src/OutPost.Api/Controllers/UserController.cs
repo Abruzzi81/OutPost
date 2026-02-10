@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OutPost.Application.DTOs;
 using OutPost.Application.Interfaces;
+using OutPost.Application.Services;
 
 namespace OutPost.Api.Controllers;
 
@@ -8,20 +9,20 @@ namespace OutPost.Api.Controllers;
 [Route("api/user")]
 public class UserController : ControllerBase
 {
-    private readonly IUserService _clientService;
+    private readonly IUserService _userService;
 
-    public UserController(IUserService clientService)
+    public UserController(IUserService userService)
     {
-        _clientService = clientService;
+        _userService = userService;
     }
 
     // ===================================== POST =====================================
 
     [HttpPost]
     [EndpointSummary("Tworzy nowego klienta")]
-    public async Task<IActionResult> AddClientAsync([FromBody] CreateUserDto dto)
+    public async Task<IActionResult> AddUserAsync([FromBody] CreateUserDto dto)
     {
-        string id = await _clientService.CreateClientAsync(dto);
+        string id = await _userService.CreateClientAsync(dto);
 
         return Ok(new { message = $"Utworzono nowego klienta o numerze ID: {id}"});
     }
@@ -31,9 +32,9 @@ public class UserController : ControllerBase
 
     [HttpGet]
     [EndpointSummary("Pobiera dane o wszystkich klientach")]
-    public async Task<IActionResult> GetAllClientsAsync()
+    public async Task<IActionResult> GetAllUsersAsync()
     {
-        var couriers = await _clientService.GetAllClientsAsync();
+        var couriers = await _userService.GetAllClientsAsync();
         if (couriers == null)
             return NotFound("Nie znaleziono klientów");
 
@@ -42,9 +43,9 @@ public class UserController : ControllerBase
 
     [HttpGet("{id}")]
     [EndpointSummary("Pobiera informacje o danym kliencie")]
-    public async Task<IActionResult> GetClientByIdAsync(string id)
+    public async Task<IActionResult> GetUserByIdAsync(string id)
     {
-        var client = await _clientService.GetClientByIdAsync(id);
+        var client = await _userService.GetClientByIdAsync(id);
         if (client == null) 
             return NotFound($"Nie znaleziono kuriera o numerze ID: {id}");
 
